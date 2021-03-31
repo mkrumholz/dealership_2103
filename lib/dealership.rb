@@ -17,4 +17,14 @@ class Dealership
   def add_car(car)
     @inventory << car
   end
+
+  def has_inventory?
+    inventory_count > 0
+  end
+
+  def cars_by_make(make)
+    @inventory.find_all do |car|
+      car.make == make
+    end
+  end
 end
