@@ -123,7 +123,6 @@ describe Dealership do
 
   describe '#details' do
     it 'creates a details hash with critical information' do
-
       dealership = Dealership.new("Acme Auto", "123 Main Street")
       car_1 = Car.new("Ford Mustang", 1500, 36)
       car_2 = Car.new("Toyota Prius", 1000, 48)
@@ -134,9 +133,24 @@ describe Dealership do
       dealership.add_car(car_3)
       dealership.add_car(car_4)
 
-      expect(dealership.details).is_a? Hash
       expect(dealership.details["total_value"]).to eq 156000
       expect(dealership.details["address"]).to eq "123 Main Street"
+    end
+  end
+
+  describe '#average_price_of_car' do
+    it 'calculates the average price of a car' do
+      dealership = Dealership.new("Acme Auto", "123 Main Street")
+      car_1 = Car.new("Ford Mustang", 1500, 36)
+      car_2 = Car.new("Toyota Prius", 1000, 48)
+      car_3 = Car.new("Toyota Tercel", 500, 48)
+      car_4 = Car.new("Chevrolet Bronco", 1250, 24)
+      dealership.add_car(car_1)
+      dealership.add_car(car_2)
+      dealership.add_car(car_3)
+      dealership.add_car(car_4)
+
+      expect(dealership.average_price_of_car).to eq "39,000"
     end
   end
 end

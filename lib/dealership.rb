@@ -40,4 +40,18 @@ class Dealership
     info["address"] = address
     info
   end
+
+  def average_price_of_car
+    average = total_value / inventory_count
+    avg_as_string = format_with_commas(average)
+  end
+
+  def format_with_commas(number)
+    num_as_string = number.to_s
+    num_reversed = num_as_string.reverse
+    num_split_reversed = num_reversed.split(/(\d{3})(\d{2})/)
+    num_split_reversed.shift
+    num_back_to_string = num_split_reversed.join(',')
+    num_str_in_order = num_back_to_string.reverse
+  end
 end
