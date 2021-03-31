@@ -27,4 +27,17 @@ class Dealership
       car.make == make
     end
   end
+
+  def total_value
+    @inventory.sum do |car|
+      car.total_cost
+    end
+  end
+
+  def details
+    info = {}
+    info["total_value"] = total_value
+    info["address"] = address
+    info
+  end
 end
