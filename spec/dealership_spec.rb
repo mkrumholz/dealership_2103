@@ -91,6 +91,12 @@ describe Dealership do
 
       expect(dealership.cars_by_make("Toyota")).to eq [car_2, car_3]
     end
+
+    it 'returns an empty array if no cars of that make are in inventory' do
+      dealership = Dealership.new("Acme Auto", "123 Main Street")
+
+      expect(dealership.cars_by_make("Toyota")).to eq []
+    end
   end
 
   describe '#total_value' do
@@ -106,6 +112,12 @@ describe Dealership do
       dealership.add_car(car_4)
 
       expect(dealership.total_value).to eq 156000
+    end
+
+    it 'returns 0 if inventory is empty' do
+      dealership = Dealership.new("Acme Auto", "123 Main Street")
+
+      expect(dealership.total_value).to eq 0
     end
   end
 
