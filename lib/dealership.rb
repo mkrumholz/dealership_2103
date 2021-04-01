@@ -47,11 +47,22 @@ class Dealership
   end
 
   def format_with_commas(number)
-    num_as_string = number.to_s
-    num_reversed = num_as_string.reverse
-    num_split_reversed = num_reversed.split(/(\d{3})(\d{2})/)
-    num_split_reversed.shift
-    num_back_to_string = num_split_reversed.join(',')
-    num_str_in_order = num_back_to_string.reverse
+    number.to_s.reverse.gsub(/(\d{3})(?=\d)/, '\\1,').reverse
+  end
+
+  def cars_sorted_by_price
+    @inventory.sort_by do |car|
+      car.total_cost
+    end
+  end
+
+  def inventory_hash
+    Hash[unique_car_makes.collect {|key| [key, cars_by_make(key)]}]
+  end
+
+  def unique_car_makes
+    unique_car_makes = @inventory.map do |car|
+      car.make
+    end.uniq
   end
 end
